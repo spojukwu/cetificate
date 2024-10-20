@@ -39,21 +39,3 @@ app.post('/send-certificate', async (req, res) => {
         res.status(500).send('Failed to generate or send the certificate');  
     }  
 });  
-
-
-
-
-// Additional API route to generate and download certificate directly (optional)  
-app.post('/generate-certificate', async (req, res) => {  
-    const { name } = req.body;  
-    const fileName = `${name}-certificate.pdf`;  
-
-    try {  
-        await generateCertificate(name, fileName);  
-        const filePath = `./certificates/${fileName}`;  
-        res.download(filePath);  
-    } catch (error) {  
-        console.error(error);  
-        res.status(500).send('Failed to generate certificate');  
-    }  
-});
